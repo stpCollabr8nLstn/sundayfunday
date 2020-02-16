@@ -1,8 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
+import bugIcon from '../../styles/bug-solid.svg';
+import caretDown from '../../styles/angle-down-solid.svg';
+
 import { colors } from '../../styles/theme';
+
+const Button = styled.button`
+  appearance: none;
+  background-color: ${colors.primary};
+  border: none;
+`;
 
 const RibbonItemLabel = styled.div`
 transform: translate3d(-100%, 0, 0);
@@ -13,6 +22,13 @@ color: transparent;
     color: ${colors.accent};
     height: 0;
     color: transparent;
+  }
+  ${Button} {
+    height: 0;
+    color: transparent;
+    :focus {
+      outline: none;
+    }
   }
 `;
 
@@ -41,6 +57,12 @@ const RibbonContainer = styled.div`
         color: ${colors.accent};
         height: 100%;
       }
+
+      ${Button} {
+        height: 100%;
+        font-size: 16px;
+        color: ${colors.softWhite};
+      }
     }
   }
 `;
@@ -55,10 +77,13 @@ const ulListStyles = css`
 `;
 
 
-const RibbonItemIcon = styled.div`
+const RibbonItemIcon = styled.img`
   background-color: ${colors.primary};
   position: relative;
   z-index: 100;
+  height: 20px;
+  width: 20px;
+  
 `;
 
 
@@ -73,25 +98,33 @@ const RibbonMenuItem = styled.li`
   margin: 8px 16px 8px 0;
 `;
 
-const Ribbon = ({ onCreateClick }) => (
-  <RibbonContainer>
-    <RibbonMenuContent>
-      <RibbonMenuItem>
-        <RibbonItemIcon>+</RibbonItemIcon>
-        <RibbonItemLabel><button onClick={onCreateClick}>Create</button></RibbonItemLabel>
-      </RibbonMenuItem>
-      
-      <RibbonMenuItem>
-        <RibbonItemIcon>+</RibbonItemIcon>
-        <RibbonItemLabel><Link to="/bug">Bug</Link></RibbonItemLabel>
-      </RibbonMenuItem>
-      
-      <RibbonMenuItem>
-        <RibbonItemIcon>+</RibbonItemIcon>
-        <RibbonItemLabel><Link to="/epic">Epic</Link></RibbonItemLabel>
-      </RibbonMenuItem>
-    </RibbonMenuContent>
-  </RibbonContainer>
-);
+
+
+const Ribbon = () => {
+  const [showSubNav, toggleShowSubNav] = useState(false);
+  return (
+    <RibbonContainer>
+      <RibbonMenuContent>
+        <RibbonMenuItem>
+          <RibbonItemIcon src={caretDown } alt="caret icon" />
+          <RibbonItemLabel><Button onClick={() => toggleShowSubNav(!showSubNav)}>Create</Button></RibbonItemLabel>
+        </RibbonMenuItem>
+        {showSubNav && (
+            <>
+              <RibbonMenuItem>
+                <RibbonItemIcon src={bugIcon} alt="bug icon" />
+                <RibbonItemLabel><Link to="/bug">Bug</Link></RibbonItemLabel>
+              </RibbonMenuItem>
+              
+              <RibbonMenuItem>
+                <RibbonItemIcon />
+                <RibbonItemLabel><Link to="/epic">Epic</Link></RibbonItemLabel>
+              </RibbonMenuItem>
+            </>
+          )}
+      </RibbonMenuContent>
+    </RibbonContainer>
+  )
+};
 
 export default Ribbon;
