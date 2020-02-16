@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
 import { colors } from '../../styles/theme';
@@ -12,8 +13,6 @@ const RibbonContainer = styled.div`
   width: 33%;
   height: 100vh;
   position: absolute;
-
-
 `;
 
 const ulListStyles = css`
@@ -25,7 +24,9 @@ const ulListStyles = css`
   padding: 0;
 `;
 
-const RibbonItemLabel = styled.div``;
+const RibbonItemLabel = styled.div`
+
+`;
 const RibbonItemIcon = styled.div`
   background-color: ${colors.primary};
   position: relative;
@@ -53,7 +54,6 @@ const RibbonMenuItem = styled.li`
 const Ribbon = () => (
   <RibbonContainer>
     <RibbonMenuContent>
-      
       <RibbonMenuItem>
         <RibbonItemIcon>+</RibbonItemIcon>
         <RibbonItemLabel>Create</RibbonItemLabel>
@@ -61,12 +61,12 @@ const Ribbon = () => (
       
       <RibbonMenuItem>
         <RibbonItemIcon>+</RibbonItemIcon>
-        <RibbonItemLabel>Bug</RibbonItemLabel>
+        <RibbonItemLabel><Link to="/bug">Bug</Link></RibbonItemLabel>
       </RibbonMenuItem>
       
       <RibbonMenuItem>
         <RibbonItemIcon>+</RibbonItemIcon>
-        <RibbonItemLabel>Epic</RibbonItemLabel>
+        <RibbonItemLabel><Link to="/epic">Epic</Link></RibbonItemLabel>
       </RibbonMenuItem>
     </RibbonMenuContent>
   </RibbonContainer>

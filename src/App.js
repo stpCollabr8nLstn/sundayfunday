@@ -1,11 +1,30 @@
 import React from 'react';
-import styled, { keyframes } from 'styled-components';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
 import Ribbon from './components/Ribbon';
+import Bug from './components/Bug';
+import Epic from './components/Epic';
 
 function App() {
   return (
-    <Ribbon></Ribbon>
+    <Router>
+        <Ribbon />
+        <Switch>
+          <Route path="/bug">
+            <Bug />
+          </Route>
+          <Route path="/epic">
+            <Epic />
+          </Route>
+        </Switch>
+      
+    </Router>
+    
   );
 }
 
