@@ -4,15 +4,45 @@ import styled, { css } from 'styled-components';
 
 import { colors } from '../../styles/theme';
 
+const RibbonItemLabel = styled.div`
+transform: translate3d(-100%, 0, 0);
+height: 0;
+color: transparent;
+  a  {
+    text-decoration: none;
+    color: ${colors.accent};
+    height: 0;
+    color: transparent;
+  }
+`;
+
 const RibbonContainer = styled.div`
   display: flex;
   justify-content: flex-start;
   background-color: ${colors.primary};
   color: ${colors.softWhite};
   font-size: 16px;
-  width: 33%;
+  width: 64px;
   height: 100vh;
   position: absolute;
+
+  transition: transform .5s ease-in;
+  
+
+  :hover {
+    width: 33%;
+    ${RibbonItemLabel} {
+      height: 100%;
+      transform: translate3d(100%, 0, 0);
+      color: ${colors.softWhite};
+      a  {
+        text-decoration: underline;
+        text-decoration-color: ${colors.accent};
+        color: ${colors.accent};
+        height: 100%;
+      }
+    }
+  }
 `;
 
 const ulListStyles = css`
@@ -24,9 +54,7 @@ const ulListStyles = css`
   padding: 0;
 `;
 
-const RibbonItemLabel = styled.div`
 
-`;
 const RibbonItemIcon = styled.div`
   background-color: ${colors.primary};
   position: relative;
@@ -38,25 +66,19 @@ const RibbonMenuContent = styled.ul`
   ${ulListStyles}
   width: 25%;
   position: absolute;
-
-  :hover {
-    ${RibbonItemLabel} {
-      transform: translate3d(100%, 0, 0);
-    }
-  }
 `;
 
 const RibbonMenuItem = styled.li`
-  transition: transform .5s ease-in;
-  transform: translate3d(-100%, 0, 0);
+  display: flex;
+  margin: 8px 16px 8px 0;
 `;
 
-const Ribbon = () => (
+const Ribbon = ({ onCreateClick }) => (
   <RibbonContainer>
     <RibbonMenuContent>
       <RibbonMenuItem>
         <RibbonItemIcon>+</RibbonItemIcon>
-        <RibbonItemLabel>Create</RibbonItemLabel>
+        <RibbonItemLabel><button onClick={onCreateClick}>Create</button></RibbonItemLabel>
       </RibbonMenuItem>
       
       <RibbonMenuItem>
